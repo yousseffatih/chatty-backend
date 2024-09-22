@@ -1,8 +1,4 @@
 import {
-  CustumerError,
-  IErrorResponse
-} from './shared/globals/helpers/error-handler';
-import {
   Application,
   json,
   urlencoded,
@@ -22,8 +18,9 @@ import { config } from './config';
 import { Server } from 'socket.io';
 import { createClient } from 'redis';
 import { createAdapter } from '@socket.io/redis-adapter';
-import applicationRoutes from './route';
 import Logger from 'bunyan';
+import { CustumerError, IErrorResponse } from '@globals/helpers/error-handler';
+import applicationRoutes from '@roote/route';
 
 const SERVER_PORT = 5000;
 const log: Logger = config.createLogger('server');
@@ -43,12 +40,13 @@ export class ChattyServer {
     this.routeMiddleware(this.app);
   }
 
+  // Security middeleware
   private sercurityMiddleware(app: Application): void {
     app.use(
       cookierSession({
-        name: 'session',
+        name: 'session', // name of cookies session 3tih smiya li bghiti 
         keys: [config.SECRET_KEY_ONE!, config.SECRET_KEY_TWO!],
-        maxAge: 24 * 7 * 3600000,
+        maxAge: 24 * 7 * 3600000, // time of cookies
         secure: config.NODE_ENV !== 'development'
       })
     );
@@ -64,6 +62,7 @@ export class ChattyServer {
     );
   }
 
+  // standare middleware
   private standerMiddleware(app: Application): void {
     app.use(compression());
     app.use(json({ limit: '50mb' }));
@@ -129,5 +128,11 @@ export class ChattyServer {
     });
   }
 
-  private socketIOConnections(io: Server): void {}
+  private socketIOConnections(io: Server): void {
+    log.info(io);
+  }
 }
+
+
+
+

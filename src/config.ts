@@ -12,10 +12,10 @@ class Confige {
   public CLIENT_URL: string | undefined;
   public REDIS_URL: string | undefined;
 
-  private readonly DEAAULT_DATABASE_URL = '';
+  private readonly DEAAULT_DATABASE_URL = 'mongodb://localhost:27017/chattyapp-backend';
 
   constructor() {
-    this.DATABASE_URL = process.env.DATABASE_URL || this.DATABASE_URL;
+    this.DATABASE_URL = process.env.DATABASE_URL || this.DEAAULT_DATABASE_URL;
     this.JWT_TOKEN = process.env.JWT_TOKEN || '1234';
     this.NODE_ENV = process.env.NODE_ENV || '';
     this.SECRET_KEY_ONE = process.env.SECRET_KEY_ONE || '';

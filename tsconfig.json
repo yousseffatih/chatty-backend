@@ -105,6 +105,23 @@
     /* Completeness */
     // "skipDefaultLibCheck": true,                      /* Skip type checking .d.ts files that are included with TypeScript. */
     "skipLibCheck": true,
-    "resolveJsonModule": true                   /* Skip type checking all .d.ts files. */
+    "resolveJsonModule": true,                   /* Skip type checking all .d.ts files. */
+    "plugins": [
+      {
+        "transform" : "typescript-transform-paths",
+      },
+      {
+        "transform" : "typescript-transform-paths",
+        "afterDeclaration" : true
+      }
+    ],
+    "paths" : {
+      "@globals/*" : ["src/shared/globals/*"],
+      "@service/*" :["src/shared/services/*"],
+      "@sockets/*" :["src/shared/sockets/*"],
+      "@worker/*" : ["src/shared/workers/*"],
+      "@roote/*" : ["src/*"]
+    },
+    
   }
 }
